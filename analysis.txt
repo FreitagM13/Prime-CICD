@@ -1,0 +1,8 @@
+1. Explain the purpose of EC2PrimeDeployRole and why it needs S3 permissions.
+    EC2PrimeDeployRole is an IAM role assigned to the EC2 instance to allow it to commnunicate with AWS services securely. Ir requires S3 permissions because CodeDeploy retrieves deployment files from an S3 bucket before deplying them to the EC2 instance. Without these permissions, the EC2 instance cannot access the necessary files, causing the deployment to fail. 
+
+2. How does appspec.yml ensure the application runs after deployment?
+    appspec.yml ensures the application runs by specifying lifecycle hooks, which executes a script that runs the prime.py program. This ensures that after deployment, the Python script is started automatically.
+
+3. If the EC2 instance were in a private subnet, what changes would be needed for CodeDeploy to work?
+    Since a private subnet lacks direct internet access, the EC2 instance cannot communicate with AWS services like CodeDeploy and S3. To resolve this, either (1) configure a NAT Gateway for internet access or (2) create VPC Endpoints for S3 and CodeDeploy to enable communication without internet access.
